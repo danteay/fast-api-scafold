@@ -1,0 +1,13 @@
+.idea/
+.git/
+
+.DS_Store
+
+flake.nix
+flake.lock
+poetry.lock
+pyproject.toml
+
+scripts/
+
+__pycache__/
