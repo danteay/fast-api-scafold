@@ -7,12 +7,12 @@ docker-compose file along with alembic configurations for database migrations us
 
 To run this project you need to have the following installed:
 
-- Docker Desktop
-- Nix for development environment (optional)
-- Poetry for python dependencies management
-- Python >= 3.9
+- [Docker Desktop](https://docs.docker.com/desktop/)
+- [Nix for development environment (optional)](https://nixos.org/download/)
+- [uv for python dependencies management](https://docs.astral.sh/uv/getting-started/installation/)
+- [Python ^3.13](https://www.python.org/downloads/)
 - openssl
-- libpq-dev
+- libpq-dev or postgresql if you are using MacOS
 - gcc
 
 ## Development environment
@@ -29,12 +29,8 @@ python project.
 
 ### Note
 
-If you are using the provided nix file, you need to have nix installed in your system. You can install nix by running the
-following command:
-
-```bash
-curl -L https://nixos.org/nix/install | sh
-```
+If you want to use the provided nix file, you need to have nix installed in your system. You can install nix by running 
+the specified command in the [nix website](https://nixos.org/download/).
 
 After installed you need to enable the flake feature by adding the following line to your `~/.config/nix/nix.conf` file:
 
@@ -47,7 +43,7 @@ experimental-features = nix-command flakes
 First make sure you have all the requirements installed. Then you can run the project by running the following command:
 
 ```bash
-poetry install --no-root
+uv sync
 ```
 
 This will install all the python dependencies. After that you can run the project by running the following command:
@@ -64,78 +60,20 @@ postgres database instance to work with.
 To create a migration you can run the following command:
 
 ```bash
-poetry run alembic revision --autogenerate -m "migration message"
+uv run alembic revision --autogenerate -m "migration message"
 ```
 
 This will create a new migration file in the `migrations/versions` folder. You can then apply the migration by running
 the following command:
 
 ```bash
-poetry run alembic upgrade head
+uv run alembic upgrade head
 ```
 
-## Project structure
+## Pre commit hooks
 
-The project structure is as follows:
+This project uses pre-commit hooks to check the code before committing. To install the pre-commit hooks run the following:
 
-```
-.
-├── Dockerfile
-├── README.md
-├── alembic.ini
-├── docker-compose.yml
-├── flake.lock
-├── flake.nix
-├── migrations
-│   ├── README
-│   ├── env.py
-│   ├── script.py.mako
-│   └── versions
-├── poetry.lock
-├── pyproject.toml
-├── requirements.txt
-├── scripts
-│   └── build.sh
-└── src
-    ├── __init__.py
-    ├── domain
-    │   ├── __init__.py
-    │   ├── repositories
-    │   │   ├── __init__.py
-    │   │   └── user.py
-    │   └── services
-    │       ├── __init__.py
-    │       └── user.py
-    ├── infra
-    │   ├── __init__.py
-    │   └── database.py
-    ├── lib
-    │   ├── __init__.py
-    │   └── middlewares
-    │       └── __init__.py
-    ├── main.py
-    ├── models
-    │   ├── __init__.py
-    │   ├── base.py
-    │   └── user.py
-    ├── providers
-    │   ├── __init__.py
-    │   ├── domain
-    │   │   ├── __init__.py
-    │   │   ├── repositories
-    │   │   │   ├── __init__.py
-    │   │   │   └── user.py
-    │   │   └── services
-    │   │       ├── __init__.py
-    │   │       └── user.py
-    │   └── infra
-    │       ├── __init__.py
-    │       └── database.py
-    └── routes
-        ├── __init__.py
-        ├── handlers
-        │   ├── __init__.py
-        │   ├── user_create.py
-        │   └── user_get.py
-        └── routes.py
+```bash
+husky install
 ```

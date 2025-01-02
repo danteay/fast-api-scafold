@@ -3,7 +3,7 @@ from .base import Base
 
 
 class User(Base):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
@@ -13,4 +13,3 @@ class User(Base):
 
     def __repr__(self):
         return f"<User(id={self.id}, name={self.name}, email={self.email})>"
-

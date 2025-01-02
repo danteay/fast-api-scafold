@@ -1,5 +1,5 @@
 {
-  description = "Ambiente de desarrollo para el Master de desarrollo de microservicios con python";
+  description = "Ambiente de desarrollo python - postgres - docker";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -15,11 +15,16 @@
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             python313
-            poetry
+            uv
+
+            husky
+            commitizen
+
             docker
             docker-compose
+
             openssl
-            postgresql
+            postgresql # to obtain libpq-dev
           ];
         };
       }

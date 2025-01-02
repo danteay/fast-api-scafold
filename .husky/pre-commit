@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+. "$(dirname "$0")/_/husky.sh"
+
+# check if the env variable GIT_NV is equal to 1, if so, skipp the script
+if [ "$GIT_NV" = "1" ]; then
+  echo "[husky] skipping pre-commit hooks"
+  exit 0
+fi
+
+# Add hook scripts here
+
+# shellcheck disable=SC2181
+if [ $? -ne 0 ]; then
+  echo "[husky] commit validation error"
+  exit 1
+fi
