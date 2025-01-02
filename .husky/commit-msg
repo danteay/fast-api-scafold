@@ -8,7 +8,7 @@ if [ "$GIT_NV" = "1" ]; then
   exit 0
 fi
 
-# Add commit message hooks here
+bash ./.husky/commit-msg-scripts/commit_lint.sh
 
 # shellcheck disable=SC2181
 if [ $? -ne 0 ]; then

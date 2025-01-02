@@ -8,7 +8,8 @@ if [ "$GIT_NV" = "1" ]; then
   exit 0
 fi
 
-# Add hook scripts here
+bash ./.husky/pre-commit-scripts/format.sh && \
+bash ./.husky/pre-commit-scripts/lint.sh
 
 # shellcheck disable=SC2181
 if [ $? -ne 0 ]; then
