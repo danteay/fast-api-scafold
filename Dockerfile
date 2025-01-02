@@ -4,6 +4,9 @@ FROM python:3.13-slim
 # Instala las dependencias del sistema
 RUN apt-get update && apt-get install -y gcc openssl libpq-dev
 
+ARG CORES=2
+ARG PORT=8000
+
 # Crea un directorio de trabajo
 WORKDIR /app
 
@@ -17,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src src
 
 # Exponer el puerto que FastAPI usará
-EXPOSE 8000
+EXPOSE ${PORT}
 
 # Comando para ejecutar la aplicación
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "${PORT}", "--workers", "${CORES}", "--log-level", "warning"]

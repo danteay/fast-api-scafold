@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends
 from src.providers.domain.services import get_user_service
 from src.routes.handlers.user_create import create_user, UserCreateRequest
 from src.routes.handlers.user_get import get_user
+from src.infra.logger import log
 
 
 router = APIRouter()
@@ -10,6 +11,7 @@ router = APIRouter()
 
 @router.get("/.health")
 def health():
+    log.info("Health check")
     return {"status": "ok"}
 
 
