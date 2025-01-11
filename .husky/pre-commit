@@ -9,7 +9,8 @@ if [ "$GIT_NV" = "1" ]; then
 fi
 
 bash ./.husky/pre-commit-scripts/format.sh && \
-bash ./.husky/pre-commit-scripts/lint.sh
+bash ./.husky/pre-commit-scripts/lint.sh && \
+bash ./.husky/pre-commit-scripts/freeze_deps.sh
 
 # shellcheck disable=SC2181
 if [ $? -ne 0 ]; then
